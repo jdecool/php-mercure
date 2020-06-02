@@ -1,0 +1,38 @@
+{
+    "name": "jdecool/mercure",
+    "type": "library",
+    "description": "Fork of the official symfony/mercure component using HTTPlug client.",
+    "keywords": ["mercure", "push", "sse", "updates", "httplug"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jérémy DECOOL",
+            "email": "contact@jdecool.fr"
+        }
+    ],
+    "require": {
+        "php": ">=7.2",
+        "php-http/client-common": "^2.1",
+        "php-http/client-implementation": "^1.0",
+        "php-http/discovery": "^1.7",
+        "php-http/httplug": "^2.1"
+    },
+    "require-dev": {
+        "php-http/guzzle6-adapter": "^2.0",
+        "php-http/mock-client": "^1.3",
+        "phpunit/phpunit": "^9.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "JDecool\\Mercure\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "JDecool\\Mercure\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
