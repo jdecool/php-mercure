@@ -1,0 +1,31 @@
+name: Continuous Integration
+on: [push]
+
+jobs:
+  linter:
+    name: Code style
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: docker://composer
+        with:
+          args: install
+      - uses: docker://php:7.4-cli-alpine
+        with:
+          entrypoint: vendor/bin/php-cs-fixer
+          args: fix -v --dry-run
+
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: ['7.3', '7.4']
+    steps:
+      - uses: actions/checkout@master
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.version }}
+          tools: composer:v1
+      - run: 'composer install'
+      - run: 'vendor/bin/phpunit'
