@@ -65,7 +65,7 @@ class PublisherTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('The provided JWT is not valid');
 
-        $jwtProvider = function (): string {
+        $jwtProvider = function(): string {
             return "invalid\r\njwt";
         };
 
