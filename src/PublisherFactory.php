@@ -10,7 +10,10 @@ use Http\Client\Common\PluginClientFactory;
 use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
+use Http\Discovery\Psr17FactoryDiscovery;
+use Http\Discovery\Psr18ClientDiscovery;
 use Http\Message\RequestFactory;
+use Psr\Http\Message\StreamFactoryInterface;
 
 class PublisherFactory
 {
@@ -18,10 +21,14 @@ class PublisherFactory
     private $requestFactory;
     private $plugins;
 
-    public function __construct(HttpClient $httpClient = null, RequestFactory $requestFactory = null)
-    {
-        $this->httpClient = $httpClient ?? HttpClientDiscovery::find();
-        $this->requestFactory = $requestFactory ?? MessageFactoryDiscovery::find();
+    public function __construct(
+        ?HttpClient $httpClient = null,
+        ?RequestFactory $requestFactory = null,
+        ?StreamFactoryInterface $streamFactory = null
+    ) {
+        $this->httpClient = $httpClient ?? Psr18ClientDiscovery::find();
+        $this->requestFactory = $requestFactory ?? Psr17FactoryDiscovery::findRequestFactory();
+        $this->streamFactory = $streamFactory ?? Psr17FactoryDiscovery::findStreamFactory();
         $this->plugins = [];
     }
 
@@ -31,12 +38,13 @@ class PublisherFactory
     public function create(string $hubUrl, callable $jwtProvider): Publisher
     {
         $this->plugins[] = new Plugin\HeaderDefaultsPlugin([
-            'User-Agent' => 'PHP-Mercure-Client',
+            'User-Agent' => 'jdecool/php-mercure',
         ]);
 
         $httpClient = new HttpMethodsClient(
             (new PluginClientFactory())->createClient($this->httpClient, $this->plugins),
-            $this->requestFactory
+            $this->requestFactory,
+            $this->streamFactory
         );
 
         return new Publisher($hubUrl, $jwtProvider, $httpClient);
