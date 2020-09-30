@@ -15,10 +15,12 @@ This component implements the "publisher" part of [the Mercure Protocol](https:/
 
 ## Install it
 
-Install using [composer](https://getcomposer.org):
+Install using [composer](https://getcomposer.org), you need to install a [PSR-18](https://www.php-fig.org/psr/psr-18/) compliant HTTP client.
+
+Example using Guzzle:
 
 ```bash
-composer require jdecool/mercure "php-http/guzzle6-adapter:^2.0"
+composer require jdecool/mercure guzzlehttp/guzzle http-interop/http-factory-guzzle
 ```
 
 ## Getting started
