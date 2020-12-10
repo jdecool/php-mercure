@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: ['7.3', '7.4']
+        version: ['7.3', '7.4', '8.0']
     steps:
       - uses: actions/checkout@master
       - uses: shivammathur/setup-php@v2
