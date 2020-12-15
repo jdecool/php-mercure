@@ -2,7 +2,7 @@ Mercure PHP component for HTTPlug
 =================================
 
 [![Build Status](https://github.com/jdecool/php-mercure/workflows/Continuous%20Integration/badge.svg)](https://github.com/jdecool/php-mercure/actions?query=workflow%3A%22Continuous+Integration%22)
-[![Latest Stable Version](https://poser.pugx.org/jdecool/php-mercure/v/stable.png)](https://packagist.org/packages/jdecool/php-mercure/README.md)
+[![Latest Stable Version](https://poser.pugx.org/jdecool/mercure/v/stable.png)](https://packagist.org/packages/jdecool/mercure)
 
 This is a fork of the official [`symfony/mercure`](https://github.com/symfony/mercure) component using `HTTPlug` client.
 
